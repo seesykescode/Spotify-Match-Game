@@ -27,9 +27,14 @@ passport.use(new SpotifyStrategy({
                email: profile.emails[0].value
            }
 
-           User.create(newUserProfile, (err, user) => {
-                if (err) return console.log(err)
-                done(null, user)
+           console.log(newUserProfile)
+
+           User.findOrCreate({email: profile.emails[0].value}, newUserProfile, (err, result) => {
+               if (err) console.log(err)
+               console.log(result.doc)
+               console.log(result.isNew)
+               newUserProfile.accessToken = accessToken
+               done(null, newUserProfile)
            })
            
        })
@@ -37,7 +42,7 @@ passport.use(new SpotifyStrategy({
 ));
 
 router.get('/spotify',
-    passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }),
+    passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private', 'playlist-read-private', 'playlist-read-collaborative'], showDialog: true }),
     function (req, res) {
         // The request will be redirected to spotify for authentication, so this
         // function will not be called.

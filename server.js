@@ -29,6 +29,13 @@ app.use('/api/user', userRoutes)
 app.use('/api/playlist', playListRoutes)
    
 
+const corsOptions = {
+    origin: true,
+    credentials: true
+}
+
+app.use(cors(corsOptions))
+
 
 
 
@@ -39,3 +46,6 @@ app.use('/api/playlist', playListRoutes)
           console.log(err || `Express server is now listening on port ${PORT}`)
       })
 
+
+
+    

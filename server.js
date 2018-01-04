@@ -29,13 +29,6 @@ app.use('/api/user', userRoutes)
 app.use('/api/playlist', playListRoutes)
    
 
-const corsOptions = {
-    origin: true,
-    credentials: true
-}
-
-app.use(cors(corsOptions))
-
 
 
 

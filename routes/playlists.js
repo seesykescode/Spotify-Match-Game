@@ -4,10 +4,13 @@ const express = require('express'),
 
    let spotifyApi = new spotifyWebAPI
 
-const isAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) return next
+
+function isAuthenticated(req, res, next) {
+    console.log(req.isAuthenticated())
+    if (req.isAuthenticated()) return next()
     else res.json({msg: "auth failed, please log in"})
 }
+
 
     router.get('/user/:id', isAuthenticated, (req, res) => {
         spotifyApi.setAccessToken(req.user.accessToken)

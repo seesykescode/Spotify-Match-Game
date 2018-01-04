@@ -51,6 +51,7 @@ router.get('/spotify',
 router.get('/spotify/callback',
     passport.authenticate('spotify', { failureRedirect: '/login' }),
     function (req, res) {
+        console.log(req.isAuthenticated())
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3001');
     });
